@@ -121,13 +121,13 @@ function ProductList({ checkoutData }) {
                 {product.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                <p>Preço: R$ {product.price}</p>
-                <p>Desconto: R$ {product.discount}</p>
-                <p>Frete: {product.freight}</p>
+                Preço: R$ {product.price}<br/>
+                Desconto: R$ {product.discount}<br/>
+                Frete: {product.freight}<br/>
                 {product.best_choice && (
-                  <p className="text-center text-red-600 font-bold mt-2">
+                  <span className="text-red-600 font-bold mt-2 flex justify-center">
                     Melhor Escolha!
-                  </p>
+                  </span>
                 )}
               </Typography>
             </CardContent>
