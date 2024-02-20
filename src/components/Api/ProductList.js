@@ -36,8 +36,8 @@ function ProductList({ checkoutData }) {
     state: "",
   });
 
-  const [open, setOpen] = useState(false);
   const [thankYou, setThankYou] = useState(false);
+  const [orderSuccess, setOrderSuccess] = useState(false);
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -75,6 +75,7 @@ function ProductList({ checkoutData }) {
       };
       const response = await axios.request(options);
       console.log("Pedido realizado com sucesso:", response.data);
+      setOrderSuccess(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } catch (error) {
       console.error("Error placing order:", error);
@@ -267,9 +268,6 @@ function ProductList({ checkoutData }) {
                   variant="contained"
                   color="success"
                   type="submit"
-                  onClick={() => {
-                    setOpen(true);
-                  }}
                 >
                   Confirmar
                 </Button>
@@ -278,8 +276,8 @@ function ProductList({ checkoutData }) {
           </Box>
         </Modal>
       )}
-      {thankYou && (
-        <div className="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-50">
+      {orderSuccess && thankYou && (
+        <div className="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-70">
           <Typography variant="h3" color="white" align="center">
             Obrigado por sua compra!
           </Typography>
