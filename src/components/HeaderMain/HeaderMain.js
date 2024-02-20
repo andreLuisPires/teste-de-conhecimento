@@ -47,7 +47,7 @@ function HeaderMain() {
                 px: 0,
               }}
             >
-              <span className="text-xl">
+              <span className="text-xl animate-flip-down animate-delay-200">
                 <p>
                   <b>Cash On Delivery</b>
                 </p>

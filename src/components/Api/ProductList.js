@@ -126,7 +126,7 @@ function ProductList({ checkoutData }) {
                 Desconto: R$ {product.discount}<br/>
                 Frete: {product.freight}<br/>
                 {product.best_choice && (
-                  <span className="text-red-600 font-bold mt-2 flex justify-center">
+                  <span className="text-red-600 font-bold mt-2 flex justify-center animate-wiggle animate-infinite">
                     Melhor Escolha!
                   </span>
                 )}

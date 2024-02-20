@@ -41,29 +41,31 @@ function CheckoutComponent() {
   return (
     <div className=" flex flex-col justify-center w-[100%]">
       <div className="flex justify-center text-center">
-        <div className="flex mt-[110px] sm:mt-[110px] md:mt-[120px] lg:mt-[130px] xl:mt-[140px] 2xl:mt-[140px] w-[1050px] p-3">
+        <div className="flex mt-[110px] sm:mt-[110px] md:mt-[120px] lg:mt-[130px] xl:mt-[140px] 2xl:mt-[140px] w-[1050px] p-3 animate-fade-left animate-delay-200">
           <span className="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold">
             {checkoutData.video_headline}
           </span>
         </div>
       </div>
-      <div className="w-[100%] flex justify-center">
+      <div className="w-[100%] flex justify-center animate-fade-left animate-delay-300">
         <div className="p-11 w-[1102px]">
           {checkoutData.video_url && (
             <VideoComponent videoUrl={checkoutData.video_url} />
           )}
         </div>
       </div>
-      <div className="w-[100%] flex justify-center p-4">
+      <div className="w-[100%] flex justify-center p-4 animate-fade-left animate-delay-400">
         <div className="flex justify-center bg-[#002C4B] text-white w-[1020px] rounded-[10px]">
           <span className="p-5 text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold">
             {checkoutData.video_sub_headline}
           </span>
         </div>
       </div>
-      <div className="mt-[100px]">
-        <h3 className="text-h1 text-center text-[30px] font-bold">Produtos Disponíveis</h3>
-        <div className="mt-[30px]">
+      <div className="mt-[100px] animate-fade-left animate-delay-500">
+        <h3 className="text-h1 text-center text-[30px] font-bold">
+          Produtos Disponíveis
+        </h3>
+        <div className="mt-[30px] animate-fade-left animate-delay-600">
           <ProductList checkoutData={checkoutData} />
         </div>
       </div>
