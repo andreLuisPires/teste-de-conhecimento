@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { Card, CardActions, CardContent, CardMedia } from "@mui/material";
 import { Button, Typography, Modal, TextField } from "@mui/material";
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Alert } from "@mui/material";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
 
@@ -37,7 +37,7 @@ function ProductList({ checkoutData }) {
   });
 
   const [thankYou, setThankYou] = useState(false);
-  const [orderSuccess, setOrderSuccess] = useState(false);
+  const [,setOrderSuccess] = useState(false);
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -45,7 +45,6 @@ function ProductList({ checkoutData }) {
 
   const closeModal = () => {
     setSelectedProduct(null);
-    setThankYou(true);
   };
 
   const handleInputChange = (e) => {
@@ -76,7 +75,7 @@ function ProductList({ checkoutData }) {
       const response = await axios.request(options);
       console.log("Pedido realizado com sucesso:", response.data);
       setOrderSuccess(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      setThankYou(true);
     } catch (error) {
       console.error("Error placing order:", error);
     }
@@ -99,7 +98,8 @@ function ProductList({ checkoutData }) {
     if (thankYou) {
       timer = setTimeout(() => {
         setThankYou(false);
-      }, 4500);
+        setOrderSuccess(false);
+      }, 2500);
     }
     return () => clearTimeout(timer);
   }, [thankYou]);
@@ -122,9 +122,12 @@ function ProductList({ checkoutData }) {
                 {product.name}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                Preço: R$ {product.price}<br/>
-                Desconto: R$ {product.discount}<br/>
-                Frete: {product.freight}<br/>
+                Preço: R$ {product.price}
+                <br />
+                Desconto: R$ {product.discount}
+                <br />
+                Frete: {product.freight}
+                <br />
                 {product.best_choice && (
                   <span className="text-red-600 font-bold mt-2 flex justify-center animate-wiggle animate-infinite">
                     Melhor Escolha!
@@ -264,11 +267,7 @@ function ProductList({ checkoutData }) {
               </div>
               <Divider variant="middle" />
               <div className="mt-2 flex justify-center">
-                <Button
-                  variant="contained"
-                  color="success"
-                  type="submit"
-                >
+                <Button variant="contained" color="success" type="submit">
                   Confirmar
                 </Button>
               </div>
@@ -276,11 +275,11 @@ function ProductList({ checkoutData }) {
           </Box>
         </Modal>
       )}
-      {orderSuccess && thankYou && (
-        <div className="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-70">
-          <Typography variant="h3" color="white" align="center">
+      {thankYou && (
+        <div className="fixed inset-0 flex justify-start items-center animate-fade-right">
+          <Alert variant="filled" severity="success">
             Obrigado por sua compra!
-          </Typography>
+          </Alert>
         </div>
       )}
     </div>
