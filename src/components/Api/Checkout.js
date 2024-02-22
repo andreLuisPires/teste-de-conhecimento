@@ -39,7 +39,7 @@ function CheckoutComponent() {
   }
 
   return (
-    <div className=" flex flex-col justify-center w-[100%]">
+    <div className="flex flex-col justify-center w-[100%]">
       <div className="flex justify-center text-center">
         <div className="flex mt-[110px] sm:mt-[110px] md:mt-[120px] lg:mt-[130px] xl:mt-[140px] 2xl:mt-[140px] w-[1050px] p-3 animate-fade-left animate-delay-200">
           <span className="text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-2xl 2xl:text-2xl font-semibold">
@@ -62,9 +62,9 @@ function CheckoutComponent() {
         </div>
       </div>
       <div className="mt-[100px] animate-fade-left animate-delay-500">
-        <h3 className="text-h1 text-center text-[30px] font-bold">
+        <span className="text-[30px] font-bold flex justify-center">
           Produtos Disponíveis
-        </h3>
+        </span>
         <div className="mt-[30px] animate-fade-left animate-delay-600">
           <ProductList checkoutData={checkoutData} />
         </div>
