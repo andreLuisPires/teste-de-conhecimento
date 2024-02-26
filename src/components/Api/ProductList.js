@@ -1,27 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import ModalComponent from "./Modal";
 
 import { Card, CardActions, CardContent, CardMedia } from "@mui/material";
-import { Button, Typography, Modal, TextField } from "@mui/material";
-import { Box, Divider, Alert } from "@mui/material";
-import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
-import LocalPhoneOutlinedIcon from "@mui/icons-material/LocalPhoneOutlined";
-
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "90%",
-  maxWidth: 500,
-  maxHeight: "90vh",
-  bgcolor: "background.paper",
-  borderRadius: "10px",
-  boxShadow: 24,
-  pt: 2,
-  px: 4,
-  pb: 3,
-};
+import { Button, Typography, Alert } from "@mui/material";
 
 function ProductList({ checkoutData }) {
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -37,7 +19,7 @@ function ProductList({ checkoutData }) {
   });
 
   const [thankYou, setThankYou] = useState(false);
-  const [,setOrderSuccess] = useState(false);
+  const [, setOrderSuccess] = useState(false);
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -69,14 +51,15 @@ function ProductList({ checkoutData }) {
         data: orderData,
         headers: {
           "Content-Type": "application/json",
-          "user-token": "E380835E-69F9-476D-89A0-C3990DAAC816",
+          "user-token": "E380835E-69F9-476D-89A0-C3990DAAC816"
         },
       };
       const response = await axios.request(options);
       console.log("Pedido realizado com sucesso:", response.data);
       setOrderSuccess(true);
       setThankYou(true);
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error placing order:", error);
     }
 
@@ -106,8 +89,11 @@ function ProductList({ checkoutData }) {
 
   return (
     <div className="flex flex-wrap justify-center gap-3">
-      {checkoutData.products.slice(0, 3).map((product) => (
-        <div key={product.product_id} className="max-w-xs mx-2 my-4">
+      {checkoutData.products.slice(0).map((product) => (
+        <div 
+          key={product.product_id}
+          className="max-w-xs mx-2 my-4"
+        >
           <Card
             className="h-full w-[300px] flex flex-col justify-between"
             elevation={24}
@@ -118,10 +104,17 @@ function ProductList({ checkoutData }) {
               title={product.name}
             />
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              <Typography 
+                gutterBottom 
+                variant="h5" 
+                component="div"
+              >
                 {product.name}
               </Typography>
-              <Typography variant="body2" color="text.secondary">
+              <Typography 
+                variant="body2" 
+                color="text.secondary"
+              >
                 Preço: R$ {product.price}
                 <br />
                 Desconto: R$ {product.discount}
@@ -150,134 +143,21 @@ function ProductList({ checkoutData }) {
         </div>
       ))}
       {selectedProduct && (
-        <Modal
-          open={true}
+        <ModalComponent
+          open={!!selectedProduct}
           onClose={closeModal}
-          aria-labelledby="product-modal-title"
-          aria-describedby="product-modal-description"
-        >
-          <Box sx={style}>
-            <Typography id="product-modal-title" variant="h5" align="center">
-              {selectedProduct.name}
-            </Typography>
-            <Divider variant="middle" />
-            <form onSubmit={handleSubmit}>
-              <TextField
-                fullWidth
-                size="small"
-                margin="normal"
-                variant="outlined"
-                label="Nome"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
-              <TextField
-                fullWidth
-                size="small"
-                margin="normal"
-                variant="outlined"
-                label="Email"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                InputProps={{
-                  endAdornment: <EmailOutlinedIcon color="action" />,
-                }}
-                required
-              />
-              <TextField
-                fullWidth
-                size="small"
-                margin="normal"
-                variant="outlined"
-                label="Número de telefone"
-                type="tel"
-                name="phone_number"
-                value={formData.phone_number}
-                onChange={handleInputChange}
-                required
-                inputProps={{
-                  pattern: "[0-9]*",
-                }}
-                InputProps={{
-                  endAdornment: <LocalPhoneOutlinedIcon color="action" />,
-                }}
-              />
-              <div className="flex gap-4">
-                <TextField
-                  fullWidth
-                  size="small"
-                  margin="normal"
-                  variant="outlined"
-                  label="Rua"
-                  name="street"
-                  value={formData.street}
-                  onChange={handleInputChange}
-                  required
-                />
-                <TextField
-                  size="small"
-                  margin="normal"
-                  variant="outlined"
-                  label="N°"
-                  name="street_number"
-                  value={formData.street_number}
-                  onChange={handleInputChange}
-                  required
-                  inputProps={{
-                    pattern: "[0-9]*",
-                  }}
-                />
-              </div>
-              <TextField
-                fullWidth
-                size="small"
-                margin="normal"
-                variant="outlined"
-                label="Bairro"
-                name="district"
-                value={formData.district}
-                onChange={handleInputChange}
-                required
-              />
-              <div className="flex gap-4">
-                <TextField
-                  fullWidth
-                  size="small"
-                  margin="normal"
-                  variant="outlined"
-                  label="Cidade"
-                  name="city"
-                  value={formData.city}
-                  onChange={handleInputChange}
-                />
-                <TextField
-                  size="small"
-                  margin="normal"
-                  variant="outlined"
-                  label="Estado"
-                  name="state"
-                  type="text"
-                  value={formData.state}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <Divider variant="middle" />
-              <div className="mt-2 flex justify-center">
-                <Button variant="contained" color="success" type="submit">
-                  Confirmar
-                </Button>
-              </div>
-            </form>
-          </Box>
-        </Modal>
+          selectedProduct={selectedProduct}
+          formData={formData}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+        />
       )}
       {thankYou && (
         <div className="fixed inset-0 flex justify-start items-center animate-fade-right">
-          <Alert variant="filled" severity="success">
+          <Alert 
+            variant="filled"
+            severity="success"
+          >
             Obrigado por sua compra!
           </Alert>
         </div>
