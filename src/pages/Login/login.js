@@ -34,7 +34,11 @@ export default function SignIn() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <Header />
-      <Container component="main" maxWidth="xs">
+      <Container 
+        component="main" 
+        maxWidth="xs" 
+        className='mt-[110px] sm:mt-[110px] md:mt-[120px] lg:mt-[130px] xl:mt-[140px] 2xl:mt-[140px] w-[1050px]'
+      >
         <CssBaseline />
         <Box
           sx={{
