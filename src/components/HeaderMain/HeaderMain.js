@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { Divider, Box, AppBar, Toolbar, Button, Container, MenuItem, Drawer } from "@mui/material";
+import { Divider, Box, AppBar, Toolbar, Button, Container, MenuItem, Drawer, Typography } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
 function HeaderMain() {
@@ -47,11 +47,9 @@ function HeaderMain() {
                 px: 0,
               }}
             >
-              <span className="text-xl animate-flip-down animate-delay-200">
-                <p>
-                  <b>Cash On Delivery</b>
-                </p>
-              </span>
+              <Typography component="h1" variant="h5" className="animate-fade-right animate-delay-200">
+                Cash On Delivery
+              </Typography>
             </Box>
             <Box
               sx={{
